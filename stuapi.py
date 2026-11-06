@@ -57,3 +57,7 @@ def delete_student(student_id: int):
     del students[student_id]
 
     return {"message": "student deleted"}
+
+if __name__== "__main__":
+    print(stance)
+    print("Satrted")
