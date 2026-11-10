@@ -1,0 +1,90 @@
+openapi: 3.0.3
+
+info:
+  title: Student Management API
+  description: Student API using Flask and YAML
+  version: 1.0.0
+
+servers:
+  - url: http://127.0.0.1:5000
+
+paths:
+
+  /students:
+    post:
+      summary: Create a student
+      operationId: createStudent
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - name
+                - department
+                - score
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                name:
+                  type: string
+                  example: Amaira
+                department:
+                  type: string
+                  example: CSE
+                score:
+                  type: number
+                  example: 95
+
+      responses:
+        "201":
+          description: Student created
+        "409":
+          description: Student already exists
+
+    get:
+      summary: Get all students
+      operationId: getStudents
+
+      responses:
+        "200":
+          description: List of students
+
+  /students/{student_id}:
+    get:
+      summary: Get one student
+      operationId: getStudent
+
+      parameters:
+        - name: student_id
+          in: path
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        "200":
+          description: Student found
+        "404":
+          description: Student not found
+
+    delete:
+      summary: Delete a student
+      operationId: deleteStudent
+
+      parameters:
+        - name: student_id
+          in: path
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        "200":
+          description: Student deleted
+        "404":
+          description: Student not found
